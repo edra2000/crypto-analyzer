@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محلل العملات الرقمية - اكتشاف فرص الاستثمار</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">
+                    <span class="title-icon">📈</span>
+                    محلل العملات الرقمية
+                </h1>
+                <p class="subtitle">اكتشف أفضل فرص الاستثمار في العملات الرقمية</p>
+            </div>
+        </header>
+
+        <!-- Controls -->
+        <div class="controls-section">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="min-probability">الحد الأدنى لاحتمالية الارتفاع:</label>
+                    <input type="range" id="min-probability" min="0" max="100" value="60" class="slider">
+                    <span id="probability-value" class="slider-value">60%</span>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sort-by">ترتيب حسب:</label>
+                    <select id="sort-by" class="select-input">
+                        <option value="probability">احتمالية الارتفاع</option>
+                        <option value="volume">حجم التداول</option>
+                        <option value="price-change">تغير السعر</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="trend-filter">نوع الاتجاه:</label>
+                    <select id="trend-filter" class="select-input">
+                        <option value="all">جميع الاتجاهات</option>
+                        <option value="bullish">صعودي فقط</option>
+                        <option value="bearish">هبوطي فقط</option>
+                    </select>
+                </div>
+
+                <button id="refresh-btn" class="refresh-btn">
+                    <span class="btn-icon">🔄</span>
+                    تحديث البيانات
+                </button>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-coins">0</div>
+                    <div class="stat-label">إجمالي العملات</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="high-probability">0</div>
+                    <div class="stat-label">احتمالية عالية</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="bullish-trend">0</div>
+                    <div class="stat-label">اتجاه صعودي</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avg-probability">0%</div>
+                    <div class="stat-label">متوسط الاحتمالية</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>جاري تحميل وتحليل البيانات...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="error-state" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h3>حدث خطأ في تحميل البيانات</h3>
+            <p>يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى</p>
+            <button onclick="location.reload()" class="retry-btn">إعادة المحاولة</button>
+        </div>
+
+        <!-- Coins Grid -->
+        <div id="coins-container" class="coins-grid">
+            <!-- العملات ستظهر هنا -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="pagination" style="display: none;">
+            <button id="prev-page" class="page-btn">السابق</button>
+            <span id="page-info" class="page-info">صفحة 1 من 1</span>
+            <button id="next-page" class="page-btn">التالي</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="coin-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-coin-name">BTC</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-price-section">
+                    <div class="modal-price" id="modal-coin-price">$0.00</div>
+                    <div class="modal-symbol" id="modal-coin-symbol">BTC/USDT</div>
+                    <div id="modal-price-change" class="price-change">+0.00%</div>
+                </div>
+
+                <div class="modal-stats">
+                    <div class="modal-stat">
+                        <label>احتمالية الارتفاع:</label>
+                        <span id="modal-pump-probability" class="highlight">0%</span>
+                    </div>
+                    <div class="modal-stat">
+                        <label>حجم التداول:</label>
+                        <span id="modal-volume">$0</span>
+                    </div>
+                </div>
+
+                <div class="technical-indicators">
+                    <h3>المؤشرات الفنية</h3>
+                    <div class="indicators-grid">
+                        <div class="indicator">
+                            <label>RSI:</label>
+                            <span id="modal-rsi">0</span>
+                        </div>
+                        <div class="indicator">
+                            <label>MACD:</label>
+                            <span id="modal-macd">0</span>
+                        </div>
+                        <div class="indicator">
+                            <label>Bollinger Bands:</label>
+                            <span id="modal-bb-position">-</span>
+                        </div>
+                        <div class="indicator">
+                            <label>الاتجاه:</label>
+                            <span id="modal-trend">-</span>
+                        </div>
+                        <div class="indicator">
+                            <label>إشارة الحجم:</label>
+                            <span id="modal-volume-signal">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="patterns-section">
+                    <h3>الأنماط المكتشفة</h3>
+                    <div id="modal-patterns" class="patterns-container">
+                        <!-- الأنماط ستظهر هنا -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
