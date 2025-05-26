@@ -647,6 +647,565 @@ body {
 .current-price {
     font-variant-numeric: tabular-nums;
 }
+/* أنماط المؤشرات الفنية */
+.indicators-preview {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+
+.indicator-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8em;
+}
+
+.indicator-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.indicator-value {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.indicator-value.overbought {
+    background: #ff4757;
+    color: white;
+}
+
+.indicator-value.oversold {
+    background: #2ed573;
+    color: white;
+}
+
+.indicator-value.neutral {
+    background: #f1f2f6;
+    color: #333;
+}
+
+.indicator-value.bullish {
+    color: #2ed573;
+}
+
+.indicator-value.bearish {
+    color: #ff4757;
+}
+
+/* أنماط الفلاتر المتقدمة */
+.advanced-filters {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h4 {
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #e1e8ed;
+    padding-bottom: 8px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-group label {
+    min-width: 80px;
+    font-weight: 500;
+    color: #666;
+}
+
+.filter-group select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+}
+
+.timeframe-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.timeframe-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.timeframe-checkbox:hover {
+    background: #f8f9fa;
+}
+
+.timeframe-checkbox input:checked + span {
+    color: #1DA1F2;
+    font-weight: bold;
+}
+
+/* أنماط تفاصيل النموذج */
+.pattern-details {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.details-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.timeframe-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.tf-tab {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tf-tab:hover {
+    background: #f8f9fa;
+}
+
+.tf-tab.active {
+    background: #1DA1F2;
+    color: white;
+    border-color: #1DA1F2;
+}
+
+.analysis-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #1DA1F2;
+}
+
+.info-card h4 {
+    margin-bottom: 15px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* أنماط تحليل النموذج */
+.pattern-analysis .pattern-overview {
+    margin-bottom: 20px;
+}
+
+.pattern-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.pattern-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.pattern-type {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.pattern-type.bullish {
+    background: #d4edda;
+    color: #155724;
+}
+
+.pattern-type.bearish {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.confidence-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.confidence-bar-large {
+    flex: 1;
+    height: 20px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4757 0%, #ffa502 50%, #2ed573 100%);
+    transition: width 0.3s ease;
+}
+
+.confidence-percentage {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* أنماط مستويات النموذج */
+.pattern-levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.level-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.level-label {
+    font-weight: 500;
+    color: #666;
+}
+
+.level-value {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.level-value.target {
+    color: #2ed573;
+}
+
+.level-value.stop-loss {
+    color: #ff4757;
+}
+
+/* أنماط تأكيد المؤشرات */
+.confirmation-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+.confirmation-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.confirmation-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.indicator-name {
+    min-width: 60px;
+    font-weight: 500;
+    color: #333;
+}
+
+.signal-strength {
+    height: 6px;
+    background: #2ed573;
+    border-radius: 3px;
+    min-width: 100px;
+}
+
+.signal-text {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* أنماط التحليل متعدد الأطر */
+.multi-timeframe .consensus-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.consensus-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.consensus-value {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.consensus-indicator.bullish .consensus-value {
+    background: #d4edda;
+    color: #155724;
+}
+
+.consensus-indicator.bearish .consensus-value {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.consensus-indicator.mixed .consensus-value {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.overall-strength {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.strength-bar {
+    width: 100px;
+    height: 10px;
+    background: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4757 0%, #ffa502 50%, #2ed573 100%);
+}
+
+.timeframes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.timeframe-card {
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.timeframe-card.has-pattern {
+    background: #e8f5e8;
+    border: 1px solid #c3e6c3;
+}
+
+.timeframe-card.no-pattern {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.tf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.tf-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.tf-type {
+    font-size: 0.8em;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.tf-details {
+    text-align: left;
+}
+
+.tf-pattern {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.tf-confidence {
+    font-weight: bold;
+    color: #2ed573;
+}
+
+/* أنماط تحليل المؤشرات */
+.indicators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.indicator-card {
+    padding: 15px;
+    
+/* أنماط الفلاتر المتقدمة */
+.advanced-filters {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h4 {
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #e1e8ed;
+    padding-bottom: 8px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-group label {
+    min-width: 80px;
+    font-weight: 500;
+    color: #666;
+}
+
+.filter-group select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+}
+
+.timeframe-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.timeframe-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.timeframe-checkbox:hover {
+    background: #f8f9fa;
+}
+
+.timeframe-checkbox input:checked + span {
+    color: #1DA1F2;
+    font-weight: bold;
+}
+/* أنماط تفاصيل النموذج */
+.pattern-details {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.details-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.timeframe-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.tf-tab {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tf-tab:hover {
+    background: #f8f9fa;
+}
+
+.tf-tab.active {
+    background: #1DA1F2;
+    color: white;
+    border-color: #1DA1F2;
+}
+
+.analysis-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #1DA1F2;
+}
+
+.info-card h4 {
+    margin-bottom: 15px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 
             }
         };
