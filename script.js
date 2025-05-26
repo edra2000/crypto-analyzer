@@ -1353,3 +1353,30 @@ if ('serviceWorker' in navigator) {
             console.log('Service Worker registration failed');
         });
 }
+// إصلاح الأقواس المفقودة في نهاية الملف
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = 'حفظ البيانات';
+    saveBtn.className = 'btn secondary';
+    saveBtn.onclick = () => detector.saveToLocalStorage();
+    toolbar.appendChild(saveBtn);
+    
+    // إعداد التنبيهات
+    detector.setupAlerts();
+    
+    // فحص التنبيهات كل دقيقة
+    setInterval(() => {
+        detector.checkForAlerts();
+    }, 60000);
+    
+}); // إغلاق DOMContentLoaded
+
+// Service Worker
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js')
+        .then(registration => {
+            console.log('Service Worker registered successfully');
+        })
+        .catch(error => {
+            console.log('Service Worker registration failed:', error);
+        });
+}
