@@ -11,7 +11,7 @@ class PatternDetector {
                 minBars: 20,
                 detect: this.detectDoubleBottom.bind(this)
             },
-            // ... (أضف باقي الأنماط بنفس الطريقة)
+            // أضف باقي الأنماط بنفس الطريقة أو حسب الحاجة...
         };
     }
 
@@ -79,7 +79,4 @@ class PatternDetector {
     // ... أي دوال مساعدة أخرى
 }
 
-// إذا كنت تستخدم ES Modules
-export default PatternDetector;
-
-// إذا كنت تستعمله مباشرة في HTML، لا تضف سطر التصدير السابق
+// بدون أي export أو import هنا
