@@ -1353,7 +1353,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // إضافة Service Worker للعمل في الخلفية
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
+   navigator.serviceWorker.register('./sw.js')
         .then(registration => {
             console.log('Service Worker registered successfully');
         })
