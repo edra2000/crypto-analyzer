@@ -60,8 +60,8 @@ class CryptoPatternDetector {
             this.loadCoinData();
         });
 
- // إغلاق النافذة
-    class CryptoPatternDetector {
+        // إغلاق النافذة
+class CryptoPatternDetector {
     constructor() {
         this.coins = [];
         this.filteredCoins = [];
@@ -1360,77 +1360,4 @@ if ('serviceWorker' in navigator) {
         .catch(error => {
             console.log('Service Worker registration failed');
         });
-}
-// Service Worker للعمل في الخلفية
-const CACHE_NAME = 'crypto-patterns-v1';
-const urlsToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/manifest.json'
-];
-
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => {
-                return cache.addAll(urlsToCache);
-            })
-    );
-});
-
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request);
-            })
-    );
-});
-
-// التعامل مع التنبيهات في الخلفية
-self.addEventListener('message', event => {
-    if (event.data && event.data.type === 'BACKGROUND_SYNC') {
-        // تنفيذ مهام في الخلفية
-        performBackgroundTasks();
-    }
-});
-
-function performBackgroundTasks() {
-    // مهام تحديث البيانات في الخلفية
-    console.log('تنفيذ مهام الخلفية...');
-}
-{
-    "name": "كاشف الأنماط الفنية للعملات الرقمية",
-    "short_name": "CryptoPatterns",
-    "description": "أداة متقدمة لاكتشاف الأنماط الفنية في العملات الرقمية",
-    "version": "1.0.0",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#4CAF50",
-    "orientation": "portrait-primary",
-    "icons": [
-        {
-            "src": "icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "permissions": [
-        "notifications"
-    ],
-    "categories": [
-        "finance",
-        "productivity"
-    ]
 }
