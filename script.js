@@ -492,36 +492,86 @@ function calculateBreakoutPrice(patternType, candles) {
     }
 }
 
-// دالة مساعدة لحساب الأهداف
-function calculateTargets(patternType, closes) {
-    const recentPrices = closes.slice(-20);
-    const avgVolatility = calculateAverageVolatility(recentPrices);
+// دالة محسنة لحساب الأهداف بناءً على قواعد التداول الفنية
+function calculateAccurateTargets(patternType, candles) {
+    const recentPrices = candles.map(c => parseFloat(c.close));
+    const highs = candles.map(c => parseFloat(c.high));
+    const lows = candles.map(c => parseFloat(c.low));
     
     switch(patternType) {
         case 'HEAD_AND_SHOULDERS':
-            const head = Math.max(...recentPrices);
-            const neckline = Math.min(...recentPrices);
+            const head = Math.max(...highs);
+            const neckline = calculateNeckline(candles);
             const height = head - neckline;
             return {
-                target1: neckline - height,
-                target2: neckline - (height * 1.618)
+                breakout: neckline,
+                target1: neckline - (height * 0.618), // هدف متحفظ
+                target2: neckline - height, // الهدف الكلاسيكي
+                target3: neckline - (height * 1.618) // هدف ممتد
             };
+
         case 'DOUBLE_BOTTOM':
-            const bottom = Math.min(...recentPrices);
-            const resistance = Math.max(...recentPrices);
-            const move = resistance - bottom;
+            const bottom = Math.min(...lows);
+            const resistance = calculateResistance(candles);
+            const height = resistance - bottom;
             return {
-                target1: resistance + move,
-                target2: resistance + (move * 1.618)
+                breakout: resistance,
+                target1: resistance + (height * 0.618),
+                target2: resistance + height,
+                target3: resistance + (height * 1.618)
             };
+
         default:
+            const avgVolatility = calculateATR(candles, 14);
+            const lastClose = recentPrices[recentPrices.length - 1];
             return {
-                target1: recentPrices[recentPrices.length - 1] + avgVolatility,
-                target2: recentPrices[recentPrices.length - 1] + (avgVolatility * 2)
+                breakout: lastClose + (avgVolatility * 0.5),
+                target1: lastClose + avgVolatility,
+                target2: lastClose + (avgVolatility * 1.5),
+                target3: lastClose + (avgVolatility * 2)
             };
     }
 }
+// في دالة عرض النتائج
+function displayPatternDetails(pattern) {
+    const targets = calculateAccurateTargets(pattern.type, pattern.candles);
+    
+    document.getElementById('modal-breakout-price').textContent = 
+        `$${targets.breakout.toFixed(4)}`;
+    document.getElementById('modal-target-1').textContent = 
+        `$${targets.target1.toFixed(4)} (${calculatePercentage(targets.breakout, targets.target1)}%)`;
+    document.getElementById('modal-target-2').textContent = 
+        `$${targets.target2.toFixed(4)} (${calculatePercentage(targets.breakout, targets.target2)}%)`;
+}
 
+// دالة حساب النسبة المئوية
+function calculatePercentage(base, target) {
+    return ((target - base) / base * 100).toFixed(2);
+}
+// دالة مساعدة لحساب خط العنق
+function calculateNeckline(candles) {
+    const pivotLows = [];
+    for (let i = 1; i < candles.length - 1; i++) {
+        if (candles[i].low < candles[i-1].low && candles[i].low < candles[i+1].low) {
+            pivotLows.push(parseFloat(candles[i].low));
+        }
+    }
+    return pivotLows.length > 0 ? 
+        pivotLows.reduce((a, b) => a + b, 0) / pivotLows.length : 
+        Math.min(...candles.map(c => c.low));
+}
+
+// دالة لحساب متوسط المدى الحقيقي (ATR)
+function calculateATR(candles, period) {
+    const trValues = [];
+    for (let i = 1; i < candles.length; i++) {
+        const hl = candles[i].high - candles[i].low;
+        const hc = Math.abs(candles[i].high - candles[i-1].close);
+        const lc = Math.abs(candles[i].low - candles[i-1].close);
+        trValues.push(Math.max(hl, hc, lc));
+    }
+    return trValues.slice(0, period).reduce((a, b) => a + b, 0) / period;
+}
 // دالة محسنة لجلب البيانات من Binance
 async function fetchRealTimeData() {
     try {
