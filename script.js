@@ -1325,16 +1325,7 @@ class CryptoPatternDetector {
 
 // تشغيل التطبيق عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
-    const detector = new CryptoPatternDetector();
-    
-    // إضافة أزرار إضافية للوظائف المتقدمة
-    const toolbar = document.querySelector('.toolbar');
-    
-    const exportBtn = document.createElement('button');
-    exportBtn.textContent = 'تصدير CSV';
-    exportBtn.className = 'btn secondary';
-    exportBtn.onclick = () => detector.exportToCSV();
-    toolbar.appendChild(exportBtn);
+    // كل الكود الخاص بالتطبيق هنا
     
     const saveBtn = document.createElement('button');
     saveBtn.textContent = 'حفظ البيانات';
@@ -1349,11 +1340,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(() => {
         detector.checkForAlerts();
     }, 60000);
-});
+    
+}); // ← إغلاق DOMContentLoaded
 
-// إضافة Service Worker للعمل في الخلفية
+// Service Worker خارج DOMContentLoaded
 if ('serviceWorker' in navigator) {
-   navigator.serviceWorker.register('./sw.js')
+    navigator.serviceWorker.register('./sw.js')
         .then(registration => {
             console.log('Service Worker registered successfully');
         })
