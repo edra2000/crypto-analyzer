@@ -3,144 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اكتشاف الأنماط الفنية - العملات الرقمية</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>مكتشف الأنماط الفنية للعملات الرقمية</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="header">
         <div class="container">
-            <h1><i class="fas fa-chart-line"></i> محلل الأنماط الفنية للعملات الرقمية</h1>
-            <div class="filters">
-                <div class="filter-group">
-                    <label for="timeframe">الإطار الزمني:</label>
-                    <select id="timeframe">
-                        <option value="1h">1 ساعة</option>
-                        <option value="3h">3 ساعات</option>
-                        <option value="4h">4 ساعات</option>
-                        <option value="1d" selected>يومي</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="pattern-filter">تصفية حسب النمط:</label>
-                    <select id="pattern-filter">
-                        <option value="all">جميع الأنماط</option>
-                        <option value="double-bottom">القاع الثنائي</option>
-                        <option value="triple-top">القمة الثلاثية</option>
-                        <option value="triple-bottom">القاع الثلاثي</option>
-                        <option value="head-shoulders">الرأس والكتفين</option>
-                        <option value="inverted-head-shoulders">الرأس والكتفين المقلوب</option>
-                        <option value="symmetrical-triangle">المثلث المتماثل</option>
-                        <option value="ascending-triangle">المثلث الصاعد</option>
-                        <option value="descending-triangle">المثلث الهابط</option>
-                        <option value="boarding-pattern">النموذج المتباعد</option>
-                        <option value="rectangle">المستطيل</option>
-                        <option value="flags-pennants">الأعلام والأعلام المثلثة</option>
-                        <option value="rising-wedge">الوتد الصاعد</option>
-                        <option value="falling-wedge">الوتد الهابط</option>
-                        <option value="rounding-tops">القمم المستديرة</option>
-                        <option value="rounding-bottoms">القيعان المستديرة</option>
-                        <option value="v-top">القمة V</option>
-                        <option value="v-bottom">القاع V</option>
-                    </select>
-                </div>
-                <button id="refresh-btn"><i class="fas fa-sync-alt"></i> تحديث البيانات</button>
-            </div>
+            <h1><i class="fas fa-chart-line"></i> مكتشف الأنماط الفنية</h1>
+            <p>استراتيجية اكتشاف الأنماط الفنية الكلاسيكية للعملات الرقمية</p>
         </div>
     </header>
 
-    <main class="container">
-        <div class="stats-bar">
-            <div class="stat">
-                <span class="stat-label">عدد العملات:</span>
-                <span class="stat-value" id="total-coins">0</span>
+    <div class="container">
+        <!-- فلاتر البحث -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>الإطار الزمني:</label>
+                <select id="timeframe">
+                    <option value="1d">يومي</option>
+                    <option value="4h">4 ساعات</option>
+                    <option value="1h">ساعة واحدة</option>
+                    <option value="3h">3 ساعات</option>
+                </select>
             </div>
-            <div class="stat">
-                <span class="stat-label">أنماط مكتشفة:</span>
-                <span class="stat-value" id="patterns-detected">0</span>
+            
+            <div class="filter-group">
+                <label>نوع النموذج:</label>
+                <select id="patternFilter">
+                    <option value="all">جميع الأنماط</option>
+                    <option value="double-bottom">القاع الثنائي</option>
+                    <option value="triple-top">القمة الثلاثية</option>
+                    <option value="triple-bottom">القاع الثلاثي</option>
+                    <option value="head-shoulders">الرأس والكتفين</option>
+                    <option value="inverted-head-shoulders">الرأس والكتفين المقلوب</option>
+                    <option value="symmetrical-triangle">المثلث المتماثل</option>
+                    <option value="ascending-triangle">المثلث الصاعد</option>
+                    <option value="descending-triangle">المثلث الهابط</option>
+                    <option value="broadening-pattern">النموذج المتباعد</option>
+                    <option value="rectangle">المستطيل</option>
+                    <option value="flags-pennants">الأعلام والأعلام المثلثة</option>
+                    <option value="rising-wedge">الوتد الصاعد</option>
+                    <option value="falling-wedge">الوتد الهابط</option>
+                    <option value="rounding-tops">القمم المستديرة</option>
+                    <option value="rounding-bottoms">القيعان المستديرة</option>
+                    <option value="v-top">نموذج القمة V</option>
+                    <option value="v-bottom">نموذج القاع V</option>
+                </select>
             </div>
-            <div class="stat">
-                <span class="stat-label">اختراقات مؤكدة:</span>
-                <span class="stat-value" id="confirmed-breakouts">0</span>
+
+            <div class="filter-group">
+                <label>حالة الاختراق:</label>
+                <select id="breakoutFilter">
+                    <option value="all">الكل</option>
+                    <option value="confirmed">تم الاختراق</option>
+                    <option value="pending">بانتظار الاختراق</option>
+                    <option value="none">لا يوجد نموذج</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <input type="text" id="searchInput" placeholder="البحث عن عملة...">
+            </div>
+
+            <button id="refreshBtn" class="refresh-btn">
+                <i class="fas fa-sync-alt"></i> تحديث البيانات
+            </button>
+        </div>
+
+        <!-- إحصائيات سريعة -->
+        <div class="stats">
+            <div class="stat-card">
+                <h3 id="totalCoins">0</h3>
+                <p>إجمالي العملات</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="patternsFound">0</h3>
+                <p>أنماط مكتشفة</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="confirmedBreakouts">0</h3>
+                <p>اختراقات مؤكدة</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="pendingBreakouts">0</h3>
+                <p>بانتظار الاختراق</p>
             </div>
         </div>
 
-        <div class="grid-container" id="crypto-grid">
-            <!-- سيتم ملؤها ديناميكيًا باستخدام JavaScript -->
+        <!-- شبكة البطاقات -->
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>جاري تحميل البيانات...</p>
         </div>
-    </main>
 
-    <!-- Modal للتفاصيل -->
-    <div class="modal" id="pattern-modal">
+        <div class="cards-grid" id="cardsGrid">
+            <!-- البطاقات ستُضاف هنا ديناميكياً -->
+        </div>
+    </div>
+
+    <!-- نافذة تفاصيل النموذج -->
+    <div class="modal" id="patternModal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close">&times;</span>
             <div class="modal-header">
                 <div class="coin-info">
-                    <div class="coin-logo" id="modal-coin-logo">B</div>
-                    <h2 id="modal-coin-name">Bitcoin</h2>
-                    <span class="coin-symbol" id="modal-coin-symbol">BTC/USDT</span>
-                </div>
-                <div class="price-info">
-                    <span class="current-price" id="modal-current-price">$30,000</span>
-                    <span class="price-change positive" id="modal-price-change">+2.5%</span>
+                    <div class="coin-logo" id="modalCoinLogo"></div>
+                    <div>
+                        <h2 id="modalCoinName"></h2>
+                        <p id="modalCoinPrice"></p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="pattern-details">
-                <h3 id="modal-pattern-name">نموذج الرأس والكتفين</h3>
-                <div class="pattern-level beginner">مبتدئ</div>
-                
-                <div class="pattern-stats">
-                    <div class="pattern-stat">
-                        <span class="stat-label">حالة النمط:</span>
-                        <span class="stat-value" id="modal-pattern-status">بانتظار تحقق الاختراق</span>
+            <div class="modal-body">
+                <div class="pattern-details">
+                    <h3>تفاصيل النموذج الفني</h3>
+                    <div class="detail-row">
+                        <span>نوع النموذج:</span>
+                        <span id="modalPatternType"></span>
                     </div>
-                    <div class="pattern-stat">
-                        <span class="stat-label">سعر الاختراق:</span>
-                        <span class="stat-value" id="modal-breakout-price">$31,200</span>
+                    <div class="detail-row">
+                        <span>مستوى الصعوبة:</span>
+                        <span id="modalDifficulty"></span>
                     </div>
-                    <div class="pattern-stat">
-                        <span class="stat-label">الهدف الأول:</span>
-                        <span class="stat-value" id="modal-target-1">$33,500</span>
+                    <div class="detail-row">
+                        <span>حالة الاختراق:</span>
+                        <span id="modalBreakoutStatus"></span>
                     </div>
-                    <div class="pattern-stat">
-                        <span class="stat-label">الهدف النهائي:</span>
-                        <span class="stat-value" id="modal-target-2">$35,800</span>
+                    <div class="detail-row">
+                        <span>الإطار الزمني:</span>
+                        <span id="modalTimeframe"></span>
                     </div>
                 </div>
-                
-                <div class="volume-info">
-                    <div class="volume-stat">
-                        <span class="stat-label">حجم السيولة:</span>
-                        <span class="stat-value" id="modal-liquidity">$1.2B</span>
+
+                <div class="targets-section">
+                    <h3>الأهداف المحسوبة</h3>
+                    <div class="targets">
+                        <div class="target">
+                            <span>الهدف الأول (5%):</span>
+                            <span id="target1" class="target-price"></span>
+                        </div>
+                        <div class="target">
+                            <span>الهدف الثاني (8%):</span>
+                            <span id="target2" class="target-price"></span>
+                        </div>
                     </div>
-                    <div class="volume-stat">
-                        <span class="stat-label">حجم التداول (24h):</span>
-                        <span class="stat-value" id="modal-volume">$500M</span>
+                </div>
+
+                <div class="technical-info">
+                    <h3>معلومات تقنية إضافية</h3>
+                    <div class="detail-row">
+                        <span>حجم التداول 24س:</span>
+                        <span id="modalVolume"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span>السيولة:</span>
+                        <span id="modalLiquidity"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span>قوة النموذج:</span>
+                        <span id="modalStrength"></span>
                     </div>
                 </div>
-                
-                <div class="timeframe-info">
-                    <span class="stat-label">الإطار الزمني:</span>
-                    <span class="stat-value" id="modal-timeframe">يومي</span>
-                </div>
-                
-                <div class="pattern-description" id="modal-pattern-description">
-                    نموذج الرأس والكتفين هو نموذج انعكاسي هبوطي يتكون من قمة (الكتف الأيسر) تليها قمة أعلى (الرأس) ثم قمة أخرى أقل (الكتف الأيمن). يعتبر النموذج مكتملاً عند اختراق خط العنق.
-                </div>
-            </div>
-            
-            <div class="modal-footer">
-                <button class="chart-btn" id="view-chart-btn"><i class="fas fa-chart-bar"></i> عرض الرسم البياني</button>
-                <button class="trade-btn" id="trade-btn"><i class="fas fa-exchange-alt"></i> التداول على Binance</button>
             </div>
         </div>
     </div>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>بيانات الأسعار مقدمة من منصة Binance Spot - تحديث تلقائي كل دقيقة</p>
-            <p>جميع العملات المقترنة بـ USDT فقط - لا تشمل العملات المستقرة</p>
+            <p>&copy; 2024 مكتشف الأنماط الفنية - جميع الحقوق محفوظة</p>
+            <p>البيانات مباشرة من منصة Binance</p>
         </div>
     </footer>
 
