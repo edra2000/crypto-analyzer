@@ -3,55 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كاشف الأنماط الفنية للعملات الرقمية</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>مكتشف الأنماط الفنية للعملات الرقمية</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🔍 كاشف الأنماط الفنية للعملات الرقمية</h1>
-            <div class="status-bar">
-                <span id="connectionStatus">🟡 جاري الاتصال...</span>
-                <span id="lastUpdate">آخر تحديث: --</span>
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-chart-line"></i> مكتشف الأنماط الفنية</h1>
+                <p>استراتيجية اكتشاف الأنماط الفنية الكلاسيكية للعملات الرقمية</p>
             </div>
         </header>
 
-        <div class="filters">
-            <select id="patternFilter">
-                <option value="">جميع الأنماط</option>
-                <option value="double-top">قمة مزدوجة</option>
-                <option value="double-bottom">قاع مزدوج</option>
-                <option value="triple-top">قمة ثلاثية</option>
-                <option value="triple-bottom">قاع ثلاثي</option>
-                <option value="head-shoulders">رأس وكتفين</option>
-                <option value="inverted-head-shoulders">رأس وكتفين مقلوب</option>
-                <option value="symmetrical-triangle">مثلث متماثل</option>
-                <option value="ascending-triangle">مثلث صاعد</option>
-                <option value="descending-triangle">مثلث هابط</option>
-                <option value="rising-wedge">إسفين صاعد</option>
-                <option value="falling-wedge">إسفين هابط</option>
-            </select>
+        <div class="filters-section">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label>الإطار الزمني:</label>
+                    <select id="timeframe-filter">
+                        <option value="1d">يومي</option>
+                        <option value="4h">4 ساعات</option>
+                        <option value="3h">3 ساعات</option>
+                        <option value="1h">ساعة واحدة</option>
+                    </select>
+                </div>
 
-            <input type="text" id="searchInput" placeholder="البحث عن عملة...">
+                <div class="filter-group">
+                    <label>النمط الفني:</label>
+                    <select id="pattern-filter">
+                        <option value="all">جميع الأنماط</option>
+                        <option value="double-bottom">القاع الثنائي</option>
+                        <option value="triple-top">القمة الثلاثية</option>
+                        <option value="triple-bottom">القاع الثلاثي</option>
+                        <option value="head-shoulders">الرأس والكتفين</option>
+                        <option value="inverted-head-shoulders">الرأس والكتفين المقلوب</option>
+                        <option value="symmetrical-triangle">المثلث المتماثل</option>
+                        <option value="ascending-triangle">المثلث الصاعد</option>
+                        <option value="descending-triangle">المثلث الهابط</option>
+                        <option value="broadening-pattern">النموذج المتباعد</option>
+                        <option value="rectangle">المستطيل</option>
+                        <option value="flags-pennants">الأعلام والأعلام المثلثة</option>
+                        <option value="rising-wedge">الوتد الصاعد</option>
+                        <option value="falling-wedge">الوتد الهابط</option>
+                        <option value="rounding-tops">القمم المستديرة</option>
+                        <option value="rounding-bottoms">القيعان المستديرة</option>
+                        <option value="v-top">نموذج القمة V</option>
+                        <option value="v-bottom">نموذج القاع V</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>حالة الاختراق:</label>
+                    <select id="breakout-filter">
+                        <option value="all">الكل</option>
+                        <option value="confirmed">تم الاختراق</option>
+                        <option value="pending">بانتظار الاختراق</option>
+                        <option value="none">لا يوجد نمط</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>البحث:</label>
+                    <input type="text" id="search-input" placeholder="ابحث عن عملة...">
+                </div>
+
+                <button id="refresh-btn" class="refresh-btn">
+                    <i class="fas fa-sync-alt"></i> تحديث البيانات
+                </button>
+            </div>
         </div>
 
-        <div id="loadingSpinner" class="loading">
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number" id="total-coins">0</div>
+                <div class="stat-label">إجمالي العملات</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="patterns-found">0</div>
+                <div class="stat-label">أنماط مكتشفة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="confirmed-breakouts">0</div>
+                <div class="stat-label">اختراقات مؤكدة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pending-breakouts">0</div>
+                <div class="stat-label">اختراقات معلقة</div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
             <div class="spinner"></div>
             <p>جاري تحميل البيانات...</p>
         </div>
 
-        <div id="cryptoGrid" class="crypto-grid"></div>
-    </div>
-
-    <!-- النافذة المنبثقة -->
-    <div id="patternModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="modalBody"></div>
+        <div class="coins-grid" id="coins-grid">
+            <!-- البطاقات ستظهر هنا -->
         </div>
     </div>
 
-    <script src="patternDetector.js"></script>
+    <!-- نافذة تفاصيل النمط -->
+    <div class="modal" id="pattern-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2 id="modal-title">تفاصيل النمط الفني</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- تفاصيل النمط ستظهر هنا -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
