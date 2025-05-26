@@ -1,11 +1,11 @@
 // Service Worker للعمل في الخلفية
 const CACHE_NAME = 'crypto-patterns-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/manifest.json'
+    '/crypto-analyzer/',           // ← أضف اسم المجلد
+    '/crypto-analyzer/index.html',
+    '/crypto-analyzer/styles.css',
+    '/crypto-analyzer/script.js',
+    '/crypto-analyzer/manifest.json'
 ];
 
 self.addEventListener('install', event => {
