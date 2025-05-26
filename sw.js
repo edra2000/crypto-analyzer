@@ -29,8 +29,10 @@ self.addEventListener('fetch', event => {
     );
 });
 
+// التعامل مع التنبيهات في الخلفية
 self.addEventListener('message', event => {
     if (event.data && event.data.type === 'BACKGROUND_SYNC') {
+        // تنفيذ مهام في الخلفية
         performBackgroundTasks();
     }
 });
