@@ -60,34 +60,7 @@ class CryptoPatternDetector {
             this.loadCoinData();
         });
 
-        // إغلاق النافذة
-class CryptoPatternDetector {
-    constructor() {
-        this.coins = [];
-        this.filteredCoins = [];
-        this.currentTimeframe = '1d';
-        this.patterns = {
-            'double-bottom': 'القاع الثنائي',
-            'triple-top': 'القمة الثلاثية',
-            'triple-bottom': 'القاع الثلاثي',
-            'head-shoulders': 'الرأس والكتفين',
-            'inverted-head-shoulders': 'الرأس والكتفين المقلوب',
-            'symmetrical-triangle': 'المثلث المتماثل',
-            'ascending-triangle': 'المثلث الصاعد',
-            'descending-triangle': 'المثلث الهابط',
-            'broadening-pattern': 'النموذج المتباعد',
-            'rectangle': 'المستطيل',
-            'flags-pennants': 'الأعلام والأعلام المثلثة',
-            'rising-wedge': 'الوتد الصاعد',
-            'falling-wedge': 'الوتد الهابط',
-            'rounding-tops': 'القمم المستديرة',
-            'rounding-bottoms': 'القيعان المستديرة',
-            'v-top': 'نموذج القمة V',
-            'v-bottom': 'نموذج القاع V'
-        };
-        
-        this.init();
-    }
+
 
     async init() {
         this.setupEventListeners();
